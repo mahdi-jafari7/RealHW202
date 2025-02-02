@@ -65,6 +65,7 @@ namespace EndPoint.MVC.Controllers
                 Status = InspectStatusEnum.Pending
             };
             //salam
+            //salam
             var saipaLimit = _siteSetting.Value.Limitation.Saipa;
             var IranKhodroLimit = _siteSetting.Value.Limitation.IranKhodro;
 
