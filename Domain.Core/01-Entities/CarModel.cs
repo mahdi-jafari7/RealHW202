@@ -12,6 +12,6 @@ namespace Domain.Core._01_Entities
         public string Name { get; set; }
         public string Manufacturer { get; set; }
 
-        public CarInspection Cars { get; set; }
+        public CarInspection? Cars { get; set; }
     }
 }
