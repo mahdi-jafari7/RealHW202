@@ -13,3 +13,5 @@ namespace Domain.Core._01_Entities
         public string Password { get; set; }
     }
 }
+
+
