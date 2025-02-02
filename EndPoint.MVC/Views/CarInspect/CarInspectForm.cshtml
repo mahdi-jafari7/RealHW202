@@ -1,0 +1,64 @@
+﻿@using Domain.Core._01_Entities
+@model CarInspection
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="text-center mb-4">رزرو نوبت معاینه خودرو</h2>
+            <form method="post" asp-controller="CarInspect" asp-action="Form">
+
+                <div class="form-group mb-3">
+                    <label for="requestDate">تاریخ درخواست (به صورت شمسی)</label>
+                    <input type="datetime" id="requestDate" name="RequestDate" class="form-control" placeholder="1402/12/10" required>
+                    @Html.ValidationMessageFor(model => model.RequestDate, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="plateNumber">شماره پلاک</label>
+                    <input type="text" id="plateNumber" name="PlateNumber" class="form-control" required>
+                    @Html.ValidationMessageFor(model => model.PlateNumber, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="carModel">مدل خودرو</label>
+                    <select id="carModel" name="CarModelId" class="form-control" required>
+                        <option value="">انتخاب کنید...</option>
+                        @foreach (var item in ViewBag.CarModels as List<SelectListItem>)
+                        {
+                            <option value="@item.Value">@item.Text</option>
+                        }
+                    </select>
+                    @Html.ValidationMessageFor(model => model.CarModelId, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="ownerNationalId">کد ملی مالک</label>
+                    <input type="text" id="ownerNationalId" name="OwnerNationalId" class="form-control" required>
+                    @Html.ValidationMessageFor(model => model.OwnerNationalId, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="productionYear">سال تولید</label>
+                    <input type="number" id="productionYear" name="ProductionYear" class="form-control" min="1300" max="1405" required>
+                    @Html.ValidationMessageFor(model => model.ProductionYear, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="ownerPhoneNumber">شماره تلفن مالک</label>
+                    <input type="text" id="ownerPhoneNumber" name="OwnerPhoneNumber" class="form-control" required>
+                    @Html.ValidationMessageFor(model => model.OwnerPhoneNumber, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="ownerAddress">آدرس مالک</label>
+                    <textarea id="ownerAddress" name="OwnerAdress" class="form-control" rows="3" required></textarea>
+                    @Html.ValidationMessageFor(model => model.OwnerAdress, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-lg w-100">ثبت نوبت</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

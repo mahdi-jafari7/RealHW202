@@ -1,0 +1,38 @@
+﻿@using Domain.Core._01_Entities
+@model List<CarInspection>
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">لیست فرم‌های معاینه خودرو</h2>
+    <table class="table table-bordered table-hover">
+        <thead class="table-primary">
+            <tr>
+                <th>عملیات</th>
+                
+                <th>پلاک</th>
+                <th>سال تولید</th>
+                <th>وضعیت</th>
+                <th>تاریخ درخواست</th>
+
+                <th>شناسه</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a asp-controller="Admin" asp-action="Confirm" asp-route-id="@item.Id" class="btn btn-sm btn-info">تایید</a>
+                        <a asp-controller="Admin" asp-action="Cancell" asp-route-id="@item.Id" class="btn btn-sm btn-danger">رد</a>
+                    </td>
+                    <td>@item.PlateNumber</td>
+
+                    <td>@item.ProductionYear</td>
+                    <td>@item.Status</td>
+                    <td>@item.RequestDate</td>
+
+                    <td>@item.Id</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

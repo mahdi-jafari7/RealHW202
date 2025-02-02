@@ -1,0 +1,55 @@
+﻿@using Domain.Core._01_Entities
+
+@model List<CarModel>
+
+<div class="container mt-5">
+    <h1 class="mb-4 text-center">لیست مدل‌های خودرو</h1>
+
+    <div class="mb-3 text-end">
+        <a asp-controller="CarModel" asp-action="Add" class="btn btn-success">افزودن مدل جدید</a>
+
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>عملیات</th>
+
+                    <th>نام مدل</th>
+                    <th>تولیدکننده</th>
+                    <th>شناسه</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <form method="post" asp-controller="CarModel" asp-action="Remove">
+                                <input type="hidden" name="id" value="@item.Id" />
+                                <button type="submit" class="btn btn-danger btn-sm">حذف</button>
+                            </form>
+                        </td>
+                        
+                        <td>@item.Name</td>
+                        <td>@item.Manufacturer</td>
+                        <td>@item.Id</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .btn-success {
+            font-weight: bold;
+        }
+    </style>
