@@ -66,6 +66,7 @@ namespace EndPoint.MVC.Controllers
             };
             //salam
             //salam
+            //bazam salam
             var saipaLimit = _siteSetting.Value.Limitation.Saipa;
             var IranKhodroLimit = _siteSetting.Value.Limitation.IranKhodro;
 
