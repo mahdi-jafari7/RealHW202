@@ -9,13 +9,16 @@ namespace Domain.Core._02_Contracts.Repositories
 {
     public interface ICarInspectRepository
     {
-        void Add(CarInspection carInspection);
-        CarInspection GetById(int id);
-        IEnumerable<CarInspection> GetAll();
-        void Update(CarInspection carInspection);
-        void Delete(int id);
-        public void SetConfirm(int id);
-        public void SetCancell(int id);
+        public Task Add(CarInspection carInspection);
+        public Task<CarInspection> GetById(int id);
+        public Task<IEnumerable<CarInspection>> GetAll();
+
+        public Task Update(CarInspection carInspection);
+
+        public Task Delete(int id);
+        public Task SetConfirm(int id);
+        public Task SetCancell(int id);
+
 
     }
 }

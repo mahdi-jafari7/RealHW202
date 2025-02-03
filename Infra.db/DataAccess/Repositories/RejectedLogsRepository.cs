@@ -1,6 +1,7 @@
 ﻿using Domain.Core._01_Entities;
 using Domain.Core._02_Contracts.Repositories;
 using Infra.db.Common;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -20,25 +21,24 @@ namespace Infra.db.DataAccess.Repositories
             _db = db;
         }
 
-        public void Add(RejectedLogs log)
+        public async Task Add(RejectedLogs log)
         {
-
             log.LogDate = CarInspection.GetPersianDateAsDateTime(DateTime.Now);
-            _db.RejectedLogs.Add(log);
-            _db.SaveChanges();
+            await _db.RejectedLogs.AddAsync(log);
+            await _db.SaveChangesAsync();
         }
 
-        public RejectedLogs GetById(int id)
+        public async Task<RejectedLogs?> GetById(int id)
         {
-            return _db.RejectedLogs.FirstOrDefault(l => l.Id == id);
+            return await _db.RejectedLogs.FirstOrDefaultAsync(l => l.Id == id);
         }
 
-        public IEnumerable<RejectedLogs> GetAll()
+        public async Task<List<RejectedLogs>> GetAll()
         {
-            return _db.RejectedLogs.ToList();
+            return await _db.RejectedLogs.ToListAsync();
         }
-
-       
 
     }
 }
+
+

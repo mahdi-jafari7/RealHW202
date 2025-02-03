@@ -18,9 +18,9 @@ namespace Domain.Service
             rejectedLogsRepository= _rejectedLogsRepository;
         }
 
-        public void Add(RejectedLogs reject)
+        public async Task Add(RejectedLogs reject)
         {
-            rejectedLogsRepository.Add(reject);
+            await rejectedLogsRepository.Add(reject);
         }
     }
 }

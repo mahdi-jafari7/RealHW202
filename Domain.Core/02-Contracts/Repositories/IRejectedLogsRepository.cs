@@ -10,10 +10,10 @@ namespace Domain.Core._02_Contracts.Repositories
     public interface IRejectedLogsRepository
     {
 
-        void Add(RejectedLogs log);
-        RejectedLogs GetById(int id);
-        IEnumerable<RejectedLogs> GetAll();
-        
-        
+        public  Task Add(RejectedLogs log);
+        public  Task<RejectedLogs?> GetById(int id);
+        public  Task<List<RejectedLogs>> GetAll();
+
+
     }
 }

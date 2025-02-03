@@ -9,13 +9,13 @@ namespace Domain.Core._02_Contracts.AppServices
 {
     public interface ICarInspectAppService
     {
-        void CreateCarInspection(CarInspection carInspection);
-        CarInspection GetCarInspectionDetails(int id);
-        IEnumerable<CarInspection> GetAllCarInspections();
-        void ModifyCarInspection(CarInspection carInspection);
-        void RemoveCarInspection(int id);
-        public void SetConfirm(int id);
-        public void SetCancell(int id);
+        public Task CreateCarInspection(CarInspection carInspection);
+        public Task<CarInspection> GetCarInspectionDetails(int id);
+        public Task<IEnumerable<CarInspection>> GetAllCarInspections();
+        public Task ModifyCarInspection(CarInspection carInspection);
+        public Task RemoveCarInspection(int id);
+        public Task SetConfirm(int id);
+        public Task SetCancell(int id);
 
     }
 }

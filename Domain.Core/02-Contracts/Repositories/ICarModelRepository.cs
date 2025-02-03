@@ -9,11 +9,10 @@ namespace Domain.Core._02_Contracts.Repositories
 {
     public interface ICarModelRepository
     {
-
-        public void Add(CarModel carmodel);
-        public void Update(CarModel carmodel);
-        public void Delete(int id);
-        public CarModel GetById(int id);
-        IEnumerable<CarModel> GetAll();
+        public Task Add(CarModel carmodel);
+        public Task<bool> Delete(int id);
+        public Task<bool> Update(CarModel carmodel);
+        public Task<CarModel> GetById(int id);
+        public Task<IEnumerable<CarModel>> GetAll();
     }
 }

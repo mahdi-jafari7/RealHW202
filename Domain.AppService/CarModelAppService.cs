@@ -18,29 +18,29 @@ namespace Domain.AppService
             _service = service;
         }
 
-        public CarModel GetCar(int id)
+        public async Task< CarModel> GetCar(int id)
         {
-            return _service.GetById(id);
+            return await _service.GetById(id);
         }
 
-        public IEnumerable<CarModel> GetCars()
+        public async Task< IEnumerable<CarModel>> GetCars()
         {
-            return _service.GetAll();
+            return await _service.GetAll();
         }
 
-        public void AddCar(CarModel car)
+        public async Task AddCar(CarModel car)
         {
-            _service.Add(car.Name, car.Manufacturer);
+            await _service.Add(car.Name, car.Manufacturer);
         }
 
-        public void EditCar(CarModel car)
+        public async Task EditCar(CarModel car)
         {
-            _service.Update(car);
+             await _service.Update(car);
         }
 
-        public void DeleteCar(int id)
+        public async Task DeleteCar(int id)
         {
-            _service.Delete(id);
+           await _service.Delete(id);
         }
     }
 }

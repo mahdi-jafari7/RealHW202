@@ -17,9 +17,9 @@ namespace Domain.AppService
         {
             _service = service;
         }
-        public bool PasswordIsValid(string username, string password)
+        public async Task<bool> PasswordIsValid(string username, string password)
         {
-            return _service.PasswordIsValid(username, password);
+            return await _service.PasswordIsValid(username, password);
         }
     }
 }

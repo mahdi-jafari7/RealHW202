@@ -1,6 +1,7 @@
 ﻿using Domain.Core._01_Entities;
 using Domain.Core._02_Contracts.Repositories;
 using Infra.db.Common;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,40 +19,45 @@ namespace Infra.db.DataAccess.Repositories
         {
             db = _db;
         }
-        public void Add(CarModel carmodel)
+        public async Task Add(CarModel carmodel)
         {
-            
-            db.CarModels.Add(carmodel);
-            db.SaveChanges();
-
+            await db.CarModels.AddAsync(carmodel);
+            await db.SaveChangesAsync();
         }
 
-        public void Delete(int id)
+        public async Task<bool> Delete(int id)
         {
-            db.CarModels.Remove(GetById(id));
-            db.SaveChanges();
+            var car = await GetById(id);
+            if (car == null) return false;
 
+            db.CarModels.Remove(car);
+            await db.SaveChangesAsync();
+            return true;
         }
 
-        public void Update(CarModel carmodel)
+        public async Task<bool> Update(CarModel carmodel)
         {
-            var existingCar = GetById(carmodel.Id);
-            if (existingCar != null)
-            {
-                existingCar.Name = carmodel.Name;
-                existingCar.Manufacturer = carmodel.Manufacturer;
-            }
+            var existingCar = await GetById(carmodel.Id);
+            if (existingCar == null) return false;
+
+            existingCar.Name = carmodel.Name;
+            existingCar.Manufacturer = carmodel.Manufacturer;
+
+            await db.SaveChangesAsync();
+            return true;
         }
 
-        public CarModel GetById(int id)
+        public async Task<CarModel> GetById(int id)
         {
-            return db.CarModels.FirstOrDefault(x => x.Id == id);
+            return await db.CarModels.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public IEnumerable<CarModel> GetAll()
+        public async Task<IEnumerable<CarModel>> GetAll()
         {
-            return db.CarModels.ToList();
+            return await db.CarModels.ToListAsync();
         }
-
     }
 }
+
+
+

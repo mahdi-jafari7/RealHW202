@@ -18,9 +18,9 @@ namespace Domain.AppService
             rejectedLogsService = _rejectedLogsService;
         }
 
-        public void Add(RejectedLogs reject)
+        public async Task Add(RejectedLogs reject)
         {
-            rejectedLogsService.Add(reject);
+           await rejectedLogsService.Add(reject);
         }
 
     }

@@ -8,7 +8,7 @@ namespace Domain.Core._02_Contracts.Services
 {
     public interface IAdminService 
     {
-        public bool PasswordIsValid(string username, string password);
+        public Task<bool> PasswordIsValid(string username, string password);
 
     }
 }

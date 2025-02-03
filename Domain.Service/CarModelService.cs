@@ -18,34 +18,34 @@ namespace Domain.Service
         {
             _carModelRepository = carModelRepository;
         }
-        public void Add(string name, string manufacturer)
+        public async Task Add(string name, string manufacturer)
         {
             CarModel carmodel = new CarModel()
             {
                 Name = name,
                 Manufacturer = manufacturer
             };
-            _carModelRepository.Add(carmodel);
+             await _carModelRepository.Add(carmodel);
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            _carModelRepository.Delete(id);
+            await _carModelRepository.Delete(id);
         }
 
-        public IEnumerable<CarModel> GetAll()
+        public async Task< IEnumerable<CarModel>> GetAll()
         {
-            return _carModelRepository.GetAll();
+            return await _carModelRepository.GetAll();
         }
 
-        public CarModel GetById(int id)
+        public async Task< CarModel> GetById(int id)
         {
-            return _carModelRepository.GetById(id);
+            return await _carModelRepository.GetById(id);
         }
 
-        public void Update(CarModel carmodel)
+        public async Task Update(CarModel carmodel)
         {
-            _carModelRepository.Update(carmodel);
+           await _carModelRepository.Update(carmodel);
         }
     }
 }
