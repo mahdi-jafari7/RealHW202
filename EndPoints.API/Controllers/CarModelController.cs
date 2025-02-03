@@ -21,12 +21,12 @@ namespace EndPoints.API.Controllers
         }
 
         [HttpGet("[action]")]
-        public IEnumerable<CarModel> GetCarModels(string apiKey)
+        public async Task<IEnumerable<CarModel>> GetCarModels(string apiKey)
         {
             if (apiKey == _apiKey)
             {
-                
-                return _carmodelappservice.GetCars();
+
+                return await _carmodelappservice.GetCars();
 
             }
             else
@@ -63,13 +63,13 @@ namespace EndPoints.API.Controllers
 
 
         [HttpPost("[action]")]
-        public string AddCarModel([FromHeader]string apiKey, [FromBody]CarModel carmodel)
+        public string AddCarModel([FromHeader] string apiKey, [FromBody] CarModel carmodel)
         {
 
 
             if (apiKey == _apiKey)
             {
-                
+
                 _carmodelappservice.AddCar(carmodel);
                 return $"Car Model added successfully";
 
@@ -82,22 +82,27 @@ namespace EndPoints.API.Controllers
         }
 
         [HttpPost("[action]")]
-        public string EditCarModel(string apiKey, int id, string name, string Manufacturer)
+        public async Task<IActionResult> EditCarModel(string apiKey, int id, string name, string manufacturer)
         {
-            if (apiKey == _apiKey)
+            if (apiKey != _apiKey)
             {
-                var carmodel = _carmodelappservice.GetCar(id);
-                carmodel.Name = name;
-                carmodel.Manufacturer = Manufacturer;
-
-                _carmodelappservice.EditCar(carmodel);
-                return $"Car Model with id {carmodel.Id} edited successfully";
+                return Unauthorized("API key is invalid!");
             }
-            else
+
+            var carmodel = await _carmodelappservice.GetCar(id);
+
+            if (carmodel == null)
             {
-                throw new Exception("api key is invalid!");
-
+                return NotFound($"Car Model with ID {id} not found!");
             }
+
+            carmodel.Name = name;  // توجه به بزرگ بودن N در Name
+            carmodel.Manufacturer = manufacturer;
+
+            await _carmodelappservice.EditCar(carmodel);
+
+            return Ok($"Car Model with ID {carmodel.Id} edited successfully");
         }
     }
 }
+

@@ -18,38 +18,38 @@ namespace Domain.Service
             _repository = repository;
         }
 
-        public void Add(CarInspection carInspection)
+        public async Task Add(CarInspection carInspection)
         {
-            _repository.Add(carInspection);
+            await _repository.Add(carInspection);
         }
 
-        public CarInspection GetById(int id)
+        public async Task< CarInspection> GetById(int id)
         {
-            return _repository.GetById(id);
+            return await _repository.GetById(id);
         }
 
-        public IEnumerable<CarInspection> GetAll()
+        public async Task< IEnumerable<CarInspection>> GetAll()
         {
-            return _repository.GetAll();
+            return await _repository.GetAll();
         }
 
-        public void Update(CarInspection carInspection)
+        public async Task Update(CarInspection carInspection)
         {
-            _repository.Update(carInspection);
+           await _repository.Update(carInspection);
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            _repository.Delete(id);
+            await _repository.Delete(id);
         }
 
-        public void SetConfirm(int id)
+        public async Task SetConfirm(int id)
         {
-            _repository.SetConfirm(id);
+            await _repository.SetConfirm(id);
         }
-        public void SetCancell(int id)
+        public async Task SetCancell(int id)
         {
-            _repository.SetCancell(id);
+            await _repository.SetCancell(id);
         }
     }
 }

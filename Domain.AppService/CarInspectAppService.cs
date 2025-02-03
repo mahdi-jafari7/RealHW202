@@ -18,38 +18,42 @@ namespace Domain.AppService
             _service = service;
         }
 
-        public void CreateCarInspection(CarInspection carInspection)
+        public async Task CreateCarInspection(CarInspection carInspection)
         {
-            _service.Add(carInspection);
+             await _service.Add(carInspection);
         }
 
-        public CarInspection GetCarInspectionDetails(int id)
+        public async Task< CarInspection> GetCarInspectionDetails(int id)
         {
-            return _service.GetById(id);
+            return await _service.GetById(id);
         }
 
-        public IEnumerable<CarInspection> GetAllCarInspections()
+        public async Task<IEnumerable<CarInspection>> GetAllCarInspections()
         {
-            return _service.GetAll();
+            return await _service.GetAll();
         }
 
-        public void ModifyCarInspection(CarInspection carInspection)
+        public async Task ModifyCarInspection(CarInspection carInspection)
         {
-            _service.Update(carInspection);
+            await _service.Update(carInspection);
         }
 
-        public void RemoveCarInspection(int id)
+        public async Task RemoveCarInspection(int id)
         {
-            _service.Delete(id);
+           await _service.Delete(id);
         }
 
-        public void SetConfirm(int id)
+        public async Task SetConfirm(int id)
         {
-            _service.SetConfirm(id);
+           await _service.SetConfirm(id);
         }
-        public void SetCancell(int id)
+        public async Task SetCancell(int id)
         {
-            _service.SetCancell(id);
+            await _service.SetCancell(id);
         }
     }
 }
+
+
+
+

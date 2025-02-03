@@ -9,12 +9,12 @@ namespace Domain.Core._02_Contracts.Services
 {
     public interface ICarInspectService
     {
-        void Add(CarInspection carInspection);
-        CarInspection GetById(int id);
-        IEnumerable<CarInspection> GetAll();
-        void Update(CarInspection carInspection);
-        void Delete(int id);
-        public void SetConfirm(int id);
-        public void SetCancell(int id);
+        Task Add(CarInspection carInspection);
+        Task<CarInspection> GetById(int id);
+        Task<IEnumerable<CarInspection>> GetAll();
+        Task Update(CarInspection carInspection);
+        Task Delete(int id);
+        public Task SetConfirm(int id);
+        public Task SetCancell(int id);
     }
 }

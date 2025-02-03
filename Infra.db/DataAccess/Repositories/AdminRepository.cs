@@ -1,5 +1,6 @@
 ﻿using Domain.Core._02_Contracts.Repositories;
 using Infra.db.Common;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,9 +19,11 @@ namespace Infra.db.DataAccess.Repositories
             _db = db;
         }
 
-        public bool PasswordIsValid(string username, string password)
+        public async Task<bool> PasswordIsValid(string username, string password)
         {
-            return _db.Admins.Any(a => a.Username == username && a.Password == password);
+            return await _db.Admins.AnyAsync(a => a.Username == username && a.Password == password);
+
         }
+
     }
 }

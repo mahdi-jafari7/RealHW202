@@ -30,13 +30,13 @@ namespace EndPoints.API.Controllers
 
 
         [HttpGet("[action]")]
-        public List<CarInspection> ListInspect(string apiKey)
+        public async Task< IEnumerable<CarInspection>> ListInspect(string apiKey)
         {
 
 
             if (apiKey == _apiKey)
             {
-                var list = _carInspectAppService.GetAllCarInspections().ToList();
+                var list =await _carInspectAppService.GetAllCarInspections();
                 return list;
 
             }

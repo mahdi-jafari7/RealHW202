@@ -9,6 +9,6 @@ namespace Domain.Core._02_Contracts.AppServices
 {
     public interface IRejectedLogsAppService
     {
-        public void Add(RejectedLogs reject);
+        public Task Add(RejectedLogs reject);
     }
 }

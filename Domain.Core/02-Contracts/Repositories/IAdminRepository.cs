@@ -8,7 +8,7 @@ namespace Domain.Core._02_Contracts.Repositories
 {
     public interface IAdminRepository
     {
-        public bool PasswordIsValid(string username, string password);
+        public Task<bool> PasswordIsValid(string username, string password);
 
     }
 }

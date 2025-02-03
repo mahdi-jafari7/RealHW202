@@ -16,9 +16,9 @@ namespace Domain.Service
         {
             _repository = repository;
         }
-        public bool PasswordIsValid(string username, string password)
+        public async Task<bool> PasswordIsValid(string username, string password)
         {
-            return _repository.PasswordIsValid(username, password);
+            return await _repository.PasswordIsValid(username, password);
         }
 
     }

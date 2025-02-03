@@ -10,10 +10,10 @@ namespace Domain.Core._02_Contracts.AppServices
     public interface ICarModelAppService
     {
 
-        CarModel GetCar(int id);
-        IEnumerable<CarModel> GetCars();
-        void AddCar(CarModel car);
-        void EditCar(CarModel car);
-        void DeleteCar(int id);
+        Task<CarModel> GetCar(int id);
+        Task<IEnumerable<CarModel>> GetCars();
+        Task AddCar(CarModel car);
+        Task EditCar(CarModel car);
+        Task DeleteCar(int id);
     }
 }

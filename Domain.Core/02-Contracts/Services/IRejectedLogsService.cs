@@ -9,7 +9,7 @@ namespace Domain.Core._02_Contracts.Services
 {
     public interface IRejectedLogsService
     {
-        public void Add(RejectedLogs reject);
+        public Task Add(RejectedLogs reject);
 
     }
 }

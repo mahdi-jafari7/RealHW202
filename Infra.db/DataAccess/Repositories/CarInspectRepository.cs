@@ -1,6 +1,7 @@
 ﻿using Domain.Core._01_Entities;
 using Domain.Core._02_Contracts.Repositories;
 using Infra.db.Common;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,24 +19,26 @@ namespace Infra.db.DataAccess.Repositories
             _db = db;
         }
 
-        public void Add(CarInspection carInspection)
+        public async Task Add(CarInspection carInspection)
         {
-            _db.Add(carInspection);
+            await _db.AddAsync(carInspection);
             _db.SaveChanges();
 
         }
+        
 
-        public CarInspection GetById(int id)
+
+        public async Task<CarInspection> GetById(int id)
         {
-            return _db.Inspecions.FirstOrDefault(c => c.Id == id);
+            return await _db.Inspecions.FirstOrDefaultAsync(c => c.Id == id);
         }
 
-        public IEnumerable<CarInspection> GetAll()
+        public async Task< IEnumerable<CarInspection>> GetAll()
         {
-            return _db.Inspecions.ToList();
+            return await _db.Inspecions.ToListAsync();
         }
 
-        public void Update(CarInspection carInspection)
+        public async Task Update(CarInspection carInspection)
         {
             var existing = _db.Inspecions.FirstOrDefault(c => c.Id == carInspection.Id);
             if (existing != null)
@@ -49,30 +52,43 @@ namespace Infra.db.DataAccess.Repositories
                 existing.OwnerAdress = carInspection.OwnerAdress;
                 existing.Status = carInspection.Status;
             }
+            
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            var carInspection = _db.Inspecions.FirstOrDefault(c => c.Id == id);
+            var carInspection = await _db.Inspecions.FirstOrDefaultAsync(c => c.Id == id);
             if (carInspection != null)
             {
                 _db.Remove(carInspection);
             }
         }
 
-        public void SetConfirm(int id)
+        public async Task SetConfirm(int id)
         {
-            _db.Inspecions.FirstOrDefault(c => c.Id == id).Status = InspectStatusEnum.Confirm;
-            _db.SaveChanges();
+            var inspection = await _db.Inspecions.FirstOrDefaultAsync(c => c.Id == id);
 
+            if (inspection == null)
+            {
+                throw new Exception("Inspection not found!");
+            }
+
+            inspection.Status = InspectStatusEnum.Confirm;
+            await _db.SaveChangesAsync(); 
         }
 
-        public void SetCancell(int id)
+        public async Task SetCancell(int id)
         {
-            _db.Inspecions.FirstOrDefault(c => c.Id == id).Status = InspectStatusEnum.Cancel;
-            _db.SaveChanges();
+            var inspection = await _db.Inspecions.FirstOrDefaultAsync(c => c.Id == id);
 
+            if (inspection == null)
+            {
+                throw new Exception("Inspection not found!");
+            }
 
+            inspection.Status = InspectStatusEnum.Cancel;
+            await _db.SaveChangesAsync();
         }
+
     }
 }
