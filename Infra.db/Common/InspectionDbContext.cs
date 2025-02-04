@@ -1,4 +1,5 @@
 ﻿using Domain.Core._01_Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Infra.db.Common
 {
-    public class InspectionDbContext : DbContext
+    public class InspectionDbContext : IdentityDbContext
     {
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -21,7 +22,7 @@ namespace Infra.db.Common
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            AdminSeedData.Seed(modelBuilder);
+            //AdminSeedData.Seed(modelBuilder);
             
             base.OnModelCreating(modelBuilder);
         }

@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace Domain.Core._01_Entities
 {
-    public class Admin : IdentityUser
+    public class ApplicationUser: IdentityUser
     {
-    
+
     }
 }
-
-

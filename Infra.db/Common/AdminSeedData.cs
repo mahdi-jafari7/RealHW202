@@ -11,16 +11,16 @@ namespace Infra.db.Common
 {
     public static class AdminSeedData
     {
-        public static void Seed(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Admin>().HasData(
-                new Admin
-                {
-                    Id = 1,
-                    Username = "admin",
-                    Password = "admin"
-                }
-            );
-        }
+        //public static void Seed(ModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<Admin>().HasData(
+        //        new Admin
+        //        {
+        //            Id = 1,
+        //            Username = "admin",
+        //            Password = "admin"
+        //        }
+        //    );
+        //}
     }
 }

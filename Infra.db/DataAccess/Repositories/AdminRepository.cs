@@ -21,7 +21,7 @@ namespace Infra.db.DataAccess.Repositories
 
         public async Task<bool> PasswordIsValid(string username, string password)
         {
-            return await _db.Admins.AnyAsync(a => a.Username == username && a.Password == password);
+            return await _db.Admins.AnyAsync(a => a.UserName == username && a.PasswordHash == password);
 
         }
 

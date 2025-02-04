@@ -72,6 +72,7 @@ namespace EndPoints.API.Controllers
 
                 _carmodelappservice.AddCar(carmodel);
                 return $"Car Model added successfully";
+                //return RedirectToAction("GetCarModels", new { apiKey = apiKey });
 
             }
             else
@@ -96,7 +97,7 @@ namespace EndPoints.API.Controllers
                 return NotFound($"Car Model with ID {id} not found!");
             }
 
-            carmodel.Name = name;  // توجه به بزرگ بودن N در Name
+            carmodel.Name = name;  
             carmodel.Manufacturer = manufacturer;
 
             await _carmodelappservice.EditCar(carmodel);

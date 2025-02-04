@@ -1,10 +1,13 @@
 using Domain.AppService;
+using Domain.Core._01_Entities;
 using Domain.Core._02_Contracts.AppServices;
 using Domain.Core._02_Contracts.Repositories;
 using Domain.Core._02_Contracts.Services;
 using Domain.Service;
 using Infra.db.Common;
 using Infra.db.DataAccess.Repositories;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +18,15 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.Configure<ApiSettings>(builder.Configuration.GetSection("ApiSettings"));
+//builder.Services.AddDbContext<InspectionDbContext>();
+
+
+builder.Services.AddDbContext<InspectionDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<InspectionDbContext>()
+    .AddDefaultTokenProviders();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IAdminAppService, AdminAppService>();
@@ -37,7 +49,7 @@ builder.Services.AddScoped<ICarModelService, CarModelService>();
 builder.Services.AddScoped<ICarModelRepository, CarModelRepository>();
 
 
-builder.Services.AddDbContext<InspectionDbContext>();
+
 
 
 var app = builder.Build();
